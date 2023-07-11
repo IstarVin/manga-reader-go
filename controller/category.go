@@ -14,7 +14,7 @@ func SendCategoryList(c *gin.Context) {
 		categoryList = append(categoryList, category.CategoryAPIModel)
 	}
 
-	c.JSON(200, categoryList)
+	c.JSON(http.StatusOK, categoryList)
 }
 
 func SendCategoryMangas(c *gin.Context) {
