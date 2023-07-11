@@ -9,6 +9,11 @@ import (
 )
 
 func LoadDatabase() {
+	loadMangaDatabase()
+	loadCategoryDatabase()
+}
+
+func loadMangaDatabase() {
 	mangaDBFile, err := os.ReadFile(global.MangaDatabasePath)
 	if err != nil {
 		if os.IsExist(err) {
@@ -28,6 +33,29 @@ func LoadDatabase() {
 		err = json.Unmarshal(mangaDBFile, &database.MangaDB.Database)
 		if err != nil {
 			log.Fatal("Error unmarshalling the manga database file")
+		}
+	}
+}
+
+func loadCategoryDatabase() {
+	categoryDBFile, err := os.ReadFile(global.CategoryDatabasePath)
+	if err != nil {
+		if os.IsExist(err) {
+			log.Fatal("Error reading the category database file")
+		}
+		database.CategoryDB.Update()
+		categoryDBFile, err = json.Marshal(database.CategoryDB.Database)
+		if err != nil {
+			log.Fatal("Error marshalling the category database file")
+		}
+		err = os.WriteFile(global.CategoryDatabasePath, categoryDBFile, 0644)
+		if err != nil {
+			log.Fatal("Error writing the category database file")
+		}
+	} else {
+		err = json.Unmarshal(categoryDBFile, &database.CategoryDB.Database)
+		if err != nil {
+			log.Fatal("Error unmarshalling the category database file")
 		}
 	}
 }

@@ -4,6 +4,8 @@ type CategoryModel struct {
 	ID int `json:"id"`
 
 	CategoryAPIModel
+
+	Mangas []*MangaModel
 }
 
 type MangaModel struct {
