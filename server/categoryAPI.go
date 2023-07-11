@@ -9,9 +9,10 @@ import (
 )
 
 func categoryAPI(api *gin.RouterGroup) {
-	category := api.Group("/categories")
+	category := api.Group("/category")
 	{
 		category.GET("/", controller.SendCategoryList)
+		category.GET("/:categoryID", categoryIDValidator, controller.SendCategoryMangas)
 	}
 }
 

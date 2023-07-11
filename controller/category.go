@@ -4,6 +4,7 @@ import (
 	"github.com/IstarVin/manga-reader-go/database"
 	"github.com/IstarVin/manga-reader-go/models"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func SendCategoryList(c *gin.Context) {
@@ -14,4 +15,18 @@ func SendCategoryList(c *gin.Context) {
 	}
 
 	c.JSON(200, categoryList)
+}
+
+func SendCategoryMangas(c *gin.Context) {
+	category := c.MustGet("category").(*models.CategoryModel)
+
+	var mangaList []models.MangaAPIModel
+	for i, mangas := range category.Mangas {
+		if i == 0 {
+			continue
+		}
+		mangaList = append(mangaList, mangas.MangaAPIModel)
+	}
+
+	c.JSON(http.StatusOK, mangaList)
 }
