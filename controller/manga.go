@@ -15,8 +15,6 @@ import (
 
 func SendMangaDetails(c *gin.Context) {
 	manga := c.MustGet("manga").(*models.MangaModel)
-	manga.MangaAPIModel.ThumbnailUrl = fmt.Sprintf("/api/v1/manga/%d/thumbnail", manga.ID)
-	manga.Url = fmt.Sprintf("/api/v1/manga/%d", manga.ID)
 
 	c.JSON(http.StatusOK, manga.MangaAPIModel)
 }
@@ -47,10 +45,7 @@ func SendChapterList(c *gin.Context) {
 }
 
 func SendChapterDetails(c *gin.Context) {
-	manga := c.MustGet("manga").(*models.MangaModel)
 	chapter := c.MustGet("chapter").(*models.ChapterModel)
-
-	chapter.Url = fmt.Sprintf("/api/v1/manga/%d/chapter/%d", manga.ID, chapter.Index)
 
 	c.JSON(http.StatusOK, chapter.ChapterAPIModel)
 }

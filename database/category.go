@@ -4,18 +4,14 @@ import (
 	"github.com/IstarVin/manga-reader-go/models"
 )
 
-var defaultCategory = models.CategoryAPIModel{
+var DefaultCategory = models.CategoryAPIModel{
 	Id:      0,
 	Order:   1,
 	Name:    "All",
 	Default: true,
 }
 
-var CategoryDB CategoryDatabase = CategoryDatabase{
-	Database: []*models.CategoryModel{
-		{CategoryAPIModel: defaultCategory, Mangas: MangaDB.Database},
-	},
-}
+var CategoryDB CategoryDatabase
 
 type CategoryDatabase struct {
 	Database []*models.CategoryModel `json:"database"`

@@ -3,6 +3,7 @@ package intializer
 import (
 	"github.com/IstarVin/manga-reader-go/database"
 	"github.com/IstarVin/manga-reader-go/global"
+	"github.com/IstarVin/manga-reader-go/models"
 	json "github.com/json-iterator/go"
 	"log"
 	"os"
@@ -43,6 +44,13 @@ func loadCategoryDatabase() {
 		if os.IsExist(err) {
 			log.Fatal("Error reading the category database file")
 		}
+
+		database.CategoryDB = database.CategoryDatabase{
+			Database: []*models.CategoryModel{
+				{CategoryAPIModel: database.DefaultCategory, Mangas: database.MangaDB.Database},
+			},
+		}
+
 		categoryDBFile, err = json.Marshal(database.CategoryDB.Database)
 		if err != nil {
 			log.Fatal("Error marshalling the category database file")

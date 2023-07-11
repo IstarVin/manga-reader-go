@@ -2,6 +2,7 @@ package database
 
 import (
 	"archive/zip"
+	"fmt"
 	"github.com/IstarVin/manga-reader-go/global"
 	"github.com/IstarVin/manga-reader-go/models"
 	json "github.com/json-iterator/go"
@@ -61,7 +62,8 @@ func (m *MangaDatabase) Update() {
 		}
 
 		mangaModel.ID = mangaIndex
-		//mangaModel.Url = manga.Name()
+		mangaModel.Url = fmt.Sprintf("/api/v1/manga/%d", mangaIndex)
+		mangaModel.ThumbnailUrl = fmt.Sprintf("/api/v1/manga/%d/thumbnail", mangaIndex)
 
 		var chaptersDetails []models.ChapterModel
 
@@ -98,6 +100,7 @@ func (m *MangaDatabase) Update() {
 			}
 
 			chapterModel.Index = chapterIndex
+			chapterModel.Url = fmt.Sprintf("/api/v1/manga/%d/chapter/%d", mangaIndex, chapterIndex)
 
 			chapterCBZ, err := zip.OpenReader(filepath.Join(global.MangasDirectory, manga.Name(), chapter.Name()))
 			if err != nil {
