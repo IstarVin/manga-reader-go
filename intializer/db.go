@@ -47,7 +47,7 @@ func loadCategoryDatabase() {
 
 		database.CategoryDB = database.CategoryDatabase{
 			Database: []*models.CategoryModel{
-				{CategoryAPIModel: database.DefaultCategory, Mangas: database.MangaDB.Database},
+				{CategoryAPIModel: database.DefaultCategory, Mangas: database.MangaDB.GetIDAll()},
 			},
 		}
 

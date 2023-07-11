@@ -35,6 +35,14 @@ func (m *MangaDatabase) FindChapterWithIndex(index int, manga *models.MangaModel
 	return nil
 }
 
+func (m *MangaDatabase) GetIDAll() []int {
+	var ids []int
+	for _, manga := range m.Database {
+		ids = append(ids, manga.ID)
+	}
+	return ids
+}
+
 func (m *MangaDatabase) Update() {
 	mangas, err := os.ReadDir(global.MangasDirectory)
 	if err != nil {

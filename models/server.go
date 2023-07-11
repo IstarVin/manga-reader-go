@@ -5,7 +5,7 @@ type CategoryModel struct {
 
 	CategoryAPIModel
 
-	Mangas []*MangaModel
+	Mangas []int
 }
 
 type MangaModel struct {
