@@ -43,7 +43,6 @@ func loadCategoryDatabase() {
 		if os.IsExist(err) {
 			log.Fatal("Error reading the category database file")
 		}
-		database.CategoryDB.Update()
 		categoryDBFile, err = json.Marshal(database.CategoryDB.Database)
 		if err != nil {
 			log.Fatal("Error marshalling the category database file")
