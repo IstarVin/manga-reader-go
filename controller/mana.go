@@ -22,7 +22,7 @@ func SendMangaDetails(c *gin.Context) {
 func SendMangaThumbnail(c *gin.Context) {
 	manga := c.MustGet("manga").(*models.MangaModel)
 
-	thumbnail, err := os.ReadFile(filepath.Join(global.MangasDirectory, manga.Title, "cover.jpg"))
+	thumbnail, err := os.ReadFile(filepath.Join(global.MangasDirectory, manga.PathName, "cover.jpg"))
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
 			"error": "Thumbnail not found",
@@ -62,7 +62,7 @@ func SendPage(c *gin.Context) {
 
 	chapter := c.MustGet("chapter").(*models.ChapterModel)
 
-	page, err := zip.OpenReader(filepath.Join(global.MangasDirectory, manga.Title, chapter.Name))
+	page, err := zip.OpenReader(filepath.Join(global.MangasDirectory, manga.PathName, chapter.Path))
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to open chapter file",
@@ -86,6 +86,10 @@ func SendPage(c *gin.Context) {
 	}
 
 	pageImg, err := io.ReadAll(pageFile)
+	err = page.Close()
+	if err != nil {
+		return
+	}
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to read page file",

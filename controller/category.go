@@ -21,10 +21,7 @@ func SendCategoryMangas(c *gin.Context) {
 	category := c.MustGet("category").(*models.CategoryModel)
 
 	var mangaList []models.MangaAPIModel
-	for i, mangaID := range category.Mangas {
-		if i == 0 {
-			continue
-		}
+	for _, mangaID := range category.Mangas {
 		mangaList = append(mangaList, database.MangaDB.FindMangaWithID(mangaID).MangaAPIModel)
 	}
 

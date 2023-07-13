@@ -8,6 +8,8 @@ type CategoryAPIModel struct {
 }
 
 type MangaAPIModel struct {
+	ID           int      `json:"id"`
+	SourceID     string   `json:"sourceId"`
 	Url          string   `json:"url"`
 	ThumbnailUrl string   `json:"thumbnailUrl"`
 	Title        string   `json:"title"`

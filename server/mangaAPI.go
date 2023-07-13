@@ -12,7 +12,7 @@ import (
 func mangaAPI(api *gin.RouterGroup) {
 	manga := api.Group("/manga/:mangaID", mangaIDValidator)
 	{
-		manga.GET("/", controller.SendMangaDetails)
+		manga.GET("", controller.SendMangaDetails)
 		manga.GET("/thumbnail", controller.SendMangaThumbnail)
 		manga.GET("/chapters", controller.SendChapterList)
 		manga.GET("/chapter/:chapterIndex", chapterIndexValidator, controller.SendChapterDetails)

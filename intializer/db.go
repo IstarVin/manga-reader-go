@@ -21,14 +21,7 @@ func loadMangaDatabase() {
 			log.Fatal("Error reading the manga database file", err)
 		}
 		database.MangaDB.Update()
-		mangaDBFile, err = json.Marshal(database.MangaDB.Database)
-		if err != nil {
-			log.Fatal("Error marshalling the manga database file")
-		}
-		err = os.WriteFile(global.MangaDatabasePath, mangaDBFile, 0644)
-		if err != nil {
-			log.Fatal("Error writing the manga database file")
-		}
+		//database.MangaDB.Save()
 
 	} else {
 		err = json.Unmarshal(mangaDBFile, &database.MangaDB.Database)
@@ -50,15 +43,7 @@ func loadCategoryDatabase() {
 				{CategoryAPIModel: database.DefaultCategory, Mangas: database.MangaDB.GetIDAll()},
 			},
 		}
-
-		categoryDBFile, err = json.Marshal(database.CategoryDB.Database)
-		if err != nil {
-			log.Fatal("Error marshalling the category database file")
-		}
-		err = os.WriteFile(global.CategoryDatabasePath, categoryDBFile, 0644)
-		if err != nil {
-			log.Fatal("Error writing the category database file")
-		}
+		//database.CategoryDB.Save()
 	} else {
 		err = json.Unmarshal(categoryDBFile, &database.CategoryDB.Database)
 		if err != nil {

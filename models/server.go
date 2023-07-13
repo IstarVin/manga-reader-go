@@ -9,15 +9,22 @@ type CategoryModel struct {
 }
 
 type MangaModel struct {
-	ID int `json:"id"`
+	MangaModelServer
+	Sync chan string
+}
+
+type MangaModelServer struct {
+	PathName string `json:"pathName"`
 
 	MangaAPIModel
 
+	CoverURL string `json:"coverUrl"`
 	Chapters []*ChapterModel
 }
 
 type ChapterModel struct {
-	Index int `json:"index"`
+	Index int    `json:"index"`
+	Path  string `json:"path"`
 
 	ChapterAPIModel
 }

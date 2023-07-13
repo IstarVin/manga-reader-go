@@ -1,6 +1,8 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 // NewServer creates a new server for models
 func NewServer() *gin.Engine {
